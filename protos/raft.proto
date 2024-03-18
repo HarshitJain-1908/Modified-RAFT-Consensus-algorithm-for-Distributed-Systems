@@ -1,60 +1,48 @@
+// raft.proto
+
 syntax = "proto3";
 
 package raft;
 
-// Message sent by clients to perform operations on the key-value store
-message ServeClientArgs {
-  string request = 1; // Contains the operation, e.g., "SET key value" or "GET key"
-}
-
-// Message returned to clients after attempting an operation
-message ServeClientReply {
-  string data = 1; // The result of the operation, e.g., the value for a "GET" request
-  string leaderID = 2; // The ID of the leader node, for client redirection if necessary
-  bool success = 3; // Indicates whether the operation was successful
-}
-
-// RPC service for Raft interactions
 service RaftService {
-  rpc ServeClient (ServeClientArgs) returns (ServeClientReply) {}
-  rpc AppendEntry (AppendEntryArgs) returns (AppendEntryReply) {}
-  rpc RequestVote (RequestVoteArgs) returns (RequestVoteReply) {}
+    // AppendEntries RPC
+    rpc AppendEntries (AppendEntriesRequest) returns (AppendEntriesReply) {}
+
+    // RequestVote RPC
+    rpc RequestVote (RequestVoteRequest) returns (RequestVoteReply) {}
 }
 
-// Arguments for AppendEntry RPC, used for log replication and heartbeats
-message AppendEntryArgs {
-  uint64 term = 1; // Leader's term
-  string leaderId = 2; // So follower can redirect clients
-  uint64 prevLogIndex = 3; // Index of log entry immediately preceding new ones
-  uint64 prevLogTerm = 4; // Term of prevLogIndex entry
-  repeated LogEntry entries = 5; // Log entries to store (empty for heartbeat; may send more than one for efficiency)
-  uint64 leaderCommit = 6; // Leader’s commitIndex
-  uint64 leaseDuration = 7; // Duration of the leader's lease
+// AppendEntries RPC messages
+message AppendEntriesRequest {
+    int32 term = 1;
+    int32 leaderId = 2;
+    int32 prevLogIndex = 3;
+    int32 prevLogTerm = 4;
+    repeated LogEntry entries = 5;
+    int32 leaderCommit = 6;
 }
 
-// Reply to AppendEntry RPC indicating success or failure
-message AppendEntryReply {
-  uint64 term = 1; // Current term, for leader to update itself
-  bool success = 2; // True if follower contained entry matching prevLogIndex and prevLogTerm
+message AppendEntriesReply {
+    int32 term = 1;
+    bool success = 2;
+    int32 conflictTerm = 3;
+    int32 firstIndexOfConflictTerm = 4;
 }
 
-// Arguments for RequestVote RPC, used in leader election
-message RequestVoteArgs {
-  uint64 term = 1; // Candidate's term
-  string candidateId = 2; // Candidate requesting vote
-  uint64 lastLogIndex = 3; // Index of candidate's last log entry
-  uint64 lastLogTerm = 4; // Term of candidate's last log entry
-}
-
-// Reply to RequestVote RPC indicating vote granted or not
-message RequestVoteReply {
-  uint64 term = 1; // Current term, for candidate to update itself
-  bool voteGranted = 2; // True means candidate received vote
-  uint64 leaseDuration = 3; // The longest old leader’s lease duration known to the voter
-}
-
-// Log entry structure
 message LogEntry {
-  uint64 term = 1; // Term when entry was received by leader
-  string command = 2; // Command for state machine
+    int32 term = 1;
+    bytes command = 2;
+}
+
+// RequestVote RPC messages
+message RequestVoteRequest {
+    int32 term = 1;
+    int32 candidateId = 2;
+    int32 lastLogIndex = 3;
+    int32 lastLogTerm = 4;
+}
+
+message RequestVoteReply {
+    int32 term = 1;
+    bool voteGranted = 2;
 }
