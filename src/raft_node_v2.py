@@ -61,16 +61,16 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
 
     def follower_routine(self):
         if time.time() >= self.election_deadline:
-            print(f"Node {self.node_id}: Election timeout, becoming candidate")
+            print(f"Node {self.node_id}: Election timeout, becoming candidate from follower at time: {time.time()}")
             self.become_candidate()
             return
 
-        if self.leader_id is not None:
-            if time.time() >= self.heartbeat_timeout:
-                print(f"Node {self.node_id}: Heartbeat timeout, becoming candidate")
-                print(self.heartbeat_timeout)
-                self.become_candidate()
-                return
+        # if self.leader_id is not None:
+        #     if time.time() >= self.heartbeat_timeout:
+        #         print(f"Node {self.node_id}: Heartbeat timeout, becoming candidate")
+        #         print(self.heartbeat_timeout)
+        #         self.become_candidate()
+        #         return
             
             
     def candidate_routine(self):
@@ -86,7 +86,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         votes = 1
         last_log_index = len(self.log) - 1
         last_log_term = self.log[-1].term if self.log else 0
-
+        print("hi2")
         #
         # time.sleep(random.uniform(0.05, 0.1))
 
@@ -110,12 +110,17 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                             self.become_leader()
                             return
                 except grpc.RpcError:
+                    vote_requests_sent += 1
                     print(f"Node {self.node_id}: Failed to send RequestVote to {node}, retrying later")
 
         # If no leader was elected and all vote requests were sent, check for election timeout
+        while time.time() < self.election_deadline:
+            print("hi")
+            pass
+        
         if vote_requests_sent == len(self.cluster_nodes) - 1:
             if time.time() >= self.election_deadline:
-                print(f"Node {self.node_id}: Election timeout, starting new election")
+                print(f"Node {self.node_id}: Election timeout, starting new election at time: {time.time()}")
                 self.become_candidate()
 
 
@@ -127,7 +132,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.leader_id = None
         self.reset_election_timeout()
 
-        print(f"Node {self.node_id}: Became candidate for term {self.current_term}")
+        print(f"Node {self.node_id}: Became candidate for term {self.current_term} at time {time.time()}")
 
         votes = 1
         last_log_index = len(self.log) - 1
@@ -154,14 +159,19 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                             print(f"Node {self.node_id}: Received majority votes, becoming leader")
                             self.become_leader()
                             return
-                except grpc.RpcError:
+                except grpc.RpcError as e:
+                    vote_requests_sent += 1
                     print(f"Node {self.node_id}: Failed to send RequestVote to {node}, retrying later")
+                    
 
         # If no leader was elected and all vote requests were sent, check for election timeout
-        # if vote_requests_sent == len(self.cluster_nodes) - 1:
-        #     if time.time() >= self.election_deadline:
-        #         print(f"Node {self.node_id}: Election timeout, starting new election")
-        #         self.become_candidate()
+        while time.time() < self.election_deadline:
+            pass
+        
+        if vote_requests_sent == len(self.cluster_nodes) - 1:
+            if time.time() >= self.election_deadline:
+                print(f"Node {self.node_id}: Election timeout, starting new election at time {time.time()}")
+                self.become_candidate()
 
     def request_vote(self, node, request):
         with grpc.insecure_channel(node) as channel:
@@ -201,14 +211,16 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         )
 
         try:
+            print(f"Sending to node {node} at time {time.time()}")
             reply = self.append_entries(node, request)
+            print("Sent")
             self.handle_append_entries_response(node, reply)
         except grpc.RpcError:
-            print(f"Node {self.node_id}: Failed to send AppendEntries to {node}, decrementing next index")
+            print(f"Node {self.node_id}: Failed to send AppendEntries to {node}, decrementing next index at time {time.time()}")
             self.next_index[node] -= 1
 
     def append_entries(self, node, request):
-        with grpc.insecure_channel(node) as channel:
+        with grpc.insecure_channel(node, options= [('grpc.enable_retries', False)]) as channel:
             stub = raft_pb2_grpc.RaftServiceStub(channel)
             return stub.AppendEntries(request)
 
@@ -258,7 +270,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             print(f"Node {self.node_id}: Sending heartbeat to cluster")
             self.reset_election_timeout()
             self.broadcast_append_entries()
-            self.heartbeat_timeout = time.time() + 0.1
+            self.heartbeat_timeout = time.time() + 1
 
     def become_follower(self):
         self.state = FOLLOWER
@@ -277,6 +289,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
 
         self.current_term = request.term
         self.leader_id = request.leaderId
+        
 
         if self.state != FOLLOWER:
             print(f"Node {self.node_id}: Received AppendEntries request from new leader {request.leaderId}, becoming follower")
@@ -327,22 +340,29 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         )
 
     def RequestVote(self, request, context):
+        print(f"received request vote from node {request.candidateId} at time {time.time()}")
         if request.term < self.current_term:
             print(f"Node {self.node_id}: Received RequestVote request with stale term {request.term}, rejecting")
             return raft_pb2.RequestVoteReply(
                 term=self.current_term,
                 voteGranted=False
             )
+            
+        if request.term > self.current_term:
+            self.current_term = request.term
+            self.voted_for = None
+            self.state = FOLLOWER
 
         if self.voted_for is None or self.voted_for == request.candidateId:
+            print(f"hi {request.candidateId}")
             last_log_index = len(self.log) - 1
             last_log_term = self.log[-1].term if self.log else 0
             print(request.lastLogTerm, request.lastLogIndex, last_log_term, last_log_index)
             if request.lastLogTerm > last_log_term or \
                     (request.lastLogTerm == last_log_term and request.lastLogIndex >= last_log_index):
                 # Tie-breaker rule: If log terms and indices are the same, vote for the candidate with the higher ID
-                if request.lastLogTerm == last_log_term and request.lastLogIndex == last_log_index:
-                    # if request.candidateId > self.node_id:
+                #if request.lastLogTerm == last_log_term and request.lastLogIndex == last_log_index:
+                if request.candidateId > self.node_id:
                     self.current_term = request.term
                     self.voted_for = request.candidateId
                     self.reset_election_timeout()
@@ -361,8 +381,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                         voteGranted=True
                     )
                     
-        print(f"Node {self.node_id}: Rejected vote request from candidate {request.candidateId} for term {request.term}")
-        print(f"Node {self.node_id}: Last log term: {last_log_term}, last log index: {last_log_index}")
+        print(f"Node {self.node_id}: Rejected vote request from candidate {request.candidateId} for term {request.term} at time {time.time()}")
+        #print(f"Node {self.node_id}: Last log term: {last_log_term}, last log index: {last_log_index}")
         print(f"Candidate's log term, log index {request.lastLogTerm}, {request.lastLogIndex}")
         print(f"{self.voted_for} ")
         return raft_pb2.RequestVoteReply(
@@ -403,5 +423,3 @@ if __name__ == '__main__':
 
     all_nodes = [int(i.split('localhost:')[1]) - 5000 for i in args.cluster_nodes]
     serve(args.node_id, args.cluster_nodes)
-    
-    
