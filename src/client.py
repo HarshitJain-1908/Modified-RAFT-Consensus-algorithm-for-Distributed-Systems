@@ -25,9 +25,9 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
             with grpc.insecure_channel(self.node_addresses[self.current_leader_id]) as channel:
                 stub = raft_pb2_grpc.RaftServiceStub(channel)
                 print(request)
-                # print(dir(stub))
+                print(dir(stub))
                 reply = stub.ServeClient(raft_pb2.ServeClientArgs(Request=request))
-                print(reply.Data, reply.LeaderID, reply.Success)
+                # print(reply.Data, reply.LeaderID, reply.Success)
                 return reply.Data, reply.LeaderID, reply.Success
         except grpc.RpcError as e:
             print("*******************")
@@ -50,10 +50,6 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
         request = f"GET {key}"
         return self.serve_client(request)
 
-    def no_op(self):
-        request = "NO-OP"
-        return self.serve_client(request)
-
 def main():
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Raft Client')
@@ -74,8 +70,7 @@ def main():
         print("\nMenu:")
         print("1. Set a key-value pair")
         print("2. Get a value by key")
-        print("3. Perform a NO-OP operation")
-        print("4. Exit")
+        print("3. Exit")
         choice = input("Enter your choice: ")
 
         if choice == '1':
@@ -88,9 +83,6 @@ def main():
             response = client.get_value(key)
             print("Response:", response)
         elif choice == '3':
-            response = client.no_op()
-            print("Response:", response)
-        elif choice == '4':
             print("Exiting...")
             break
         else:

@@ -40,7 +40,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
 
         self.state = FOLLOWER
         self.leader_id = None
-        #
+        
         # self.leader_address = None
         self.election_deadline = None
         self.heartbeat_timeout = None
@@ -60,18 +60,20 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         if not os.path.exists(self.logs_dir):
             os.makedirs(self.logs_dir)
 
-        self.log_file = os.path.join(self.logs_dir, "logs.txt")
-        self.metadata_file = os.path.join(self.logs_dir, "metadata.txt")
-        self.dump_file = os.path.join(self.logs_dir, "dump.txt")
-
-        if os.path.exists(self.log_file):
-            with open(self.log_file, "r") as f:
-                self.log = f.readlines()
+        log_file = os.path.join(self.logs_dir, "logs.txt")
+        if os.path.exists(log_file):
+            with open(log_file, "r") as f:
+                for line in f:
+                    term, command = line.strip().split(" ", 1)
+                    self.log.append((int(term), command))
         else:
             self.log = []
 
-        if os.path.exists(self.metadata_file):
-            with open(self.metadata_file, "r") as f:
+
+        metadata_file = os.path.join(self.logs_dir, "metadata.txt")
+
+        if os.path.exists(metadata_file):
+            with open(metadata_file, "r") as f:
                 metadata = f.readline().strip().split()
                 self.commit_length = int(metadata[0])
                 self.current_term = int(metadata[1])
@@ -81,87 +83,58 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.current_term = 0
             self.voted_for = None
 
-    def save_logs(self):
-        with open(self.log_file, "w") as f:
-            f.write("\n".join(self.log))
+        dump_file = os.path.join(self.logs_dir, "dump.txt")
 
-        with open(self.metadata_file, "w") as f:
+    def save_logs(self):
+        log_file = os.path.join(self.logs_dir, "logs.txt")
+        metadata_file = os.path.join(self.logs_dir, "metadata.txt")
+
+        with open(log_file, "w") as f:
+            for term, command in self.log:
+                f.write(f"{term} {command}\n")
+
+        with open(metadata_file, "w") as f:
             f.write(f"{self.commit_length} {self.current_term} {self.voted_for}")
 
-    def append_log_entry(self, entry):
-        self.log.append(entry)
+    def append_log_entry(self,entry):
+        self.log.append((self.current_term,entry))
         self.save_logs()
 
-    def set_key_value(self, key, value, term):
-        entry = f"SET {key} {value} {term}"
+    def set_key_value(self, key, value):
+        entry = f"SET {key} {value}"
         self.append_log_entry(entry)
 
     def get_key_value(self, key):
-        for entry in reversed(self.log):
-            if entry.startswith(f"SET {key}"):
-                return entry.split()[2]
+        for term, entry in reversed(self.log):
+            if entry.startswith(f"{term} SET {key}"):
+                return entry.split()[3]
         return ""
 
-
-    # def serve_client(self, request):
-    #     # Acquire the leader lock
-    #     # with leader_lock:
-    #     leader_id = self.leader_id
-    #     #leader_address = self.leader_address
-
-    #     if leader_id is None:
-    #         return raft_pb2.ServeClientReply(
-    #             Data="No leader available",
-    #             LeaderID="",
-    #             Success=False
-    #         )
-
-    #     try:
-    #         with grpc.insecure_channel(leader_address) as channel:
-    #             stub = raft_pb2_grpc.RaftServiceStub(channel)
-    #             reply = stub.ServeClient(request)
-    #             return reply
-    #     except grpc.RpcError:
-    #         return raft_pb2.ServeClientReply(
-    #             Data="Failed to reach leader",
-    #             LeaderID="",
-    #             Success=False
-    #         )
-
-    def ServeClient(self, request, context):        
-        print(request)
-        #response = self.serve_client(request)
-        
+    def ServeClient(self, request, context):
+        print(request)  
         command = request.Request.split()
+        key, value = command[1], command[2]
         if command[0] == "SET":
-            key, value, term = command[1], command[2], command[3]
-            self.set_key_value(key, value, term)
+            self.set_key_value(key, value)
             return raft_pb2.ServeClientReply(
                 Data="SUCCESS",
-                LeaderID=str(self.node_id),
+                LeaderID=str(self.leader_id),
                 Success=True
             )
         elif command[0] == "GET":
-            key = command[1]
             value = self.get_key_value(key)
             return raft_pb2.ServeClientReply(
                 Data=value,
-                LeaderID=str(self.node_id),
-                Success=True
-            )
-        elif command[0] == "NO-OP":
-            return raft_pb2.ServeClientReply(
-                Data="NO-OP",
-                LeaderID=str(self.node_id),
+                LeaderID=str(self.leader_id),
                 Success=True
             )
         else:
             return raft_pb2.ServeClientReply(
                 Data="Invalid command",
-                LeaderID=str(self.node_id),
+                LeaderID=str(self.leader_id),
                 Success=False
             )
-
+        
     def reset_election_timeout(self):
         self.election_deadline = time.time() + random.uniform(5, 10)
         self.heartbeat_timeout = time.time() + 3
