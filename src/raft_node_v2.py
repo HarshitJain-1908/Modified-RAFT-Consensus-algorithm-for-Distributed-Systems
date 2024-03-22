@@ -8,6 +8,8 @@ import sys
 
 import raft_pb2
 import raft_pb2_grpc
+# import raft_pb2_grpcaf
+# import raft_pb2
 
 # Raft node states
 FOLLOWER = 0
@@ -36,6 +38,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
 
         self.state = FOLLOWER
         self.leader_id = None
+        self.leader_address = None
         self.election_deadline = None
         self.heartbeat_timeout = None
         self.reset_election_timeout()
@@ -211,6 +214,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
     def become_leader(self):
         self.state = LEADER
         self.leader_id = self.node_id
+        self.leader_address = f'localhost:{self.node_id + 5000}'
         self.reset_election_timeout()
 
         print(f"Node {self.node_id}: Became leader for term {self.current_term}")

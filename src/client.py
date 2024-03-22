@@ -1,14 +1,13 @@
 import grpc
-# import raft_pb2
-# import raft_pb2_grpc
-import client_pb2_grpc
-import client_pb2
+import raft_pb2
+import raft_pb2_grpc
+
 import argparse
 
-class RaftClient(client_pb2_grpc.RaftServiceServicer):
+class RaftClient(raft_pb2_grpc.RaftServiceServicer):
     def __init__(self, node_addresses):
         self.node_addresses = node_addresses
-        self.current_leader_id = 1
+        self.current_leader_id = 0
 
     def set_leader_id(self, leader_id):
         self.current_leader_id = leader_id
@@ -23,10 +22,10 @@ class RaftClient(client_pb2_grpc.RaftServiceServicer):
         try:
             print("*******************")
             with grpc.insecure_channel(self.node_addresses[self.current_leader_id]) as channel:
-                stub = client_pb2_grpc.RaftServiceStub(channel)
+                stub = raft_pb2_grpc.RaftServiceStub(channel)
                 print(request)
-                print(dir(stub))
-                reply = stub.ServeClient(client_pb2.ServeClientArgs(Request=request))
+                # print(dir(stub))
+                reply = stub.ServeClient(raft_pb2.ServeClientArgs(Request=request))
                 print(reply.Data, reply.LeaderID, reply.Success)
                 return reply.Data, reply.LeaderID, reply.Success
         except grpc.RpcError as e:
