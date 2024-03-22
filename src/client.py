@@ -7,6 +7,7 @@ import argparse
 class RaftClient(raft_pb2_grpc.RaftServiceServicer):
     def __init__(self, node_addresses):
         self.node_addresses = node_addresses
+        print(self.node_addresses)
         self.current_leader_id = 0
 
     def set_leader_id(self, leader_id):

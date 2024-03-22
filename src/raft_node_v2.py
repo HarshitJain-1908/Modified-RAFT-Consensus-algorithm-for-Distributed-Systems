@@ -5,6 +5,7 @@ from concurrent import futures
 import argparse
 import signal
 import sys
+import os
 
 import raft_pb2
 import raft_pb2_grpc
@@ -28,6 +29,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.node_id = node_id
         self.cluster_nodes = cluster_nodes
         self.node_role = node_role
+        
 
         self.current_term = 0
         self.voted_for = None
@@ -38,46 +40,127 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
 
         self.state = FOLLOWER
         self.leader_id = None
-        self.leader_address = None
+        #
+        # self.leader_address = None
         self.election_deadline = None
         self.heartbeat_timeout = None
         self.reset_election_timeout()
+        
+        LOGS_DIR = f"logs_node_{self.node_id}"
+        self.logs_dir = LOGS_DIR.format(node_id=node_id)
+        self.load_logs()
 
         self.next_index = {}
         self.match_index = {}
         for node in cluster_nodes:
             self.next_index[node] = 0
             self.match_index[node] = 0
+            
+    def load_logs(self):
+        if not os.path.exists(self.logs_dir):
+            os.makedirs(self.logs_dir)
 
-    def serve_client(self, request):
-        # Acquire the leader lock
-        # with leader_lock:
-        leader_id = self.leader_id
-        leader_address = self.leader_address
+        self.log_file = os.path.join(self.logs_dir, "logs.txt")
+        self.metadata_file = os.path.join(self.logs_dir, "metadata.txt")
+        self.dump_file = os.path.join(self.logs_dir, "dump.txt")
 
-        if leader_id is None:
-            return raft_pb2.ServeClientReply(
-                Data="No leader available",
-                LeaderID="",
-                Success=False
-            )
+        if os.path.exists(self.log_file):
+            with open(self.log_file, "r") as f:
+                self.log = f.readlines()
+        else:
+            self.log = []
 
-        try:
-            with grpc.insecure_channel(leader_address) as channel:
-                stub = raft_pb2_grpc.RaftServiceStub(channel)
-                reply = stub.ServeClient(request)
-                return reply
-        except grpc.RpcError:
-            return raft_pb2.ServeClientReply(
-                Data="Failed to reach leader",
-                LeaderID="",
-                Success=False
-            )
+        if os.path.exists(self.metadata_file):
+            with open(self.metadata_file, "r") as f:
+                metadata = f.readline().strip().split()
+                self.commit_length = int(metadata[0])
+                self.current_term = int(metadata[1])
+                self.voted_for = int(metadata[2])
+        else:
+            self.commit_length = 0
+            self.current_term = 0
+            self.voted_for = None
 
-    def ServeClient(self, request, context):
+    def save_logs(self):
+        with open(self.log_file, "w") as f:
+            f.write("\n".join(self.log))
+
+        with open(self.metadata_file, "w") as f:
+            f.write(f"{self.commit_length} {self.current_term} {self.voted_for}")
+
+    def append_log_entry(self, entry):
+        self.log.append(entry)
+        self.save_logs()
+
+    def set_key_value(self, key, value, term):
+        entry = f"SET {key} {value} {term}"
+        self.append_log_entry(entry)
+
+    def get_key_value(self, key):
+        for entry in reversed(self.log):
+            if entry.startswith(f"SET {key}"):
+                return entry.split()[2]
+        return ""
+
+
+    # def serve_client(self, request):
+    #     # Acquire the leader lock
+    #     # with leader_lock:
+    #     leader_id = self.leader_id
+    #     #leader_address = self.leader_address
+
+    #     if leader_id is None:
+    #         return raft_pb2.ServeClientReply(
+    #             Data="No leader available",
+    #             LeaderID="",
+    #             Success=False
+    #         )
+
+    #     try:
+    #         with grpc.insecure_channel(leader_address) as channel:
+    #             stub = raft_pb2_grpc.RaftServiceStub(channel)
+    #             reply = stub.ServeClient(request)
+    #             return reply
+    #     except grpc.RpcError:
+    #         return raft_pb2.ServeClientReply(
+    #             Data="Failed to reach leader",
+    #             LeaderID="",
+    #             Success=False
+    #         )
+
+    def ServeClient(self, request, context):        
         print(request)
-        response = self.serve_client(request)
-        return response
+        #response = self.serve_client(request)
+        
+        command = request.Request.split()
+        if command[0] == "SET":
+            key, value, term = command[1], command[2], command[3]
+            self.set_key_value(key, value, term)
+            return raft_pb2.ServeClientReply(
+                Data="SUCCESS",
+                LeaderID=str(self.node_id),
+                Success=True
+            )
+        elif command[0] == "GET":
+            key = command[1]
+            value = self.get_key_value(key)
+            return raft_pb2.ServeClientReply(
+                Data=value,
+                LeaderID=str(self.node_id),
+                Success=True
+            )
+        elif command[0] == "NO-OP":
+            return raft_pb2.ServeClientReply(
+                Data="NO-OP",
+                LeaderID=str(self.node_id),
+                Success=True
+            )
+        else:
+            return raft_pb2.ServeClientReply(
+                Data="Invalid command",
+                LeaderID=str(self.node_id),
+                Success=False
+            )
 
     def reset_election_timeout(self):
         self.election_deadline = time.time() + random.uniform(5, 10)
@@ -214,7 +297,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
     def become_leader(self):
         self.state = LEADER
         self.leader_id = self.node_id
-        self.leader_address = f'localhost:{self.node_id + 5000}'
+        # self.leader_address = f'localhost:{self.node_id + 5000}'
         self.reset_election_timeout()
 
         print(f"Node {self.node_id}: Became leader for term {self.current_term}")
