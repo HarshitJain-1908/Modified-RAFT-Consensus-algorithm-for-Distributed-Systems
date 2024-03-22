@@ -340,6 +340,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         )
 
     def RequestVote(self, request, context):
+        print(f"received request vote from node {request.candidateId} at time {time.time()}")
         if request.term < self.current_term:
             print(f"Node {self.node_id}: Received RequestVote request with stale term {request.term}, rejecting")
             return raft_pb2.RequestVoteReply(
@@ -360,16 +361,16 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             if request.lastLogTerm > last_log_term or \
                     (request.lastLogTerm == last_log_term and request.lastLogIndex >= last_log_index):
                 # Tie-breaker rule: If log terms and indices are the same, vote for the candidate with the higher ID
-                if request.lastLogTerm == last_log_term and request.lastLogIndex == last_log_index:
-                    if request.candidateId > self.node_id:
-                        self.current_term = request.term
-                        self.voted_for = request.candidateId
-                        self.reset_election_timeout()
-                        print(f"Node {self.node_id}: Granted vote to candidate {request.candidateId} for term {request.term} (tie-breaker)")
-                        return raft_pb2.RequestVoteReply(
-                            term=self.current_term,
-                            voteGranted=True
-                        )
+                #if request.lastLogTerm == last_log_term and request.lastLogIndex == last_log_index:
+                if request.candidateId > self.node_id:
+                    self.current_term = request.term
+                    self.voted_for = request.candidateId
+                    self.reset_election_timeout()
+                    print(f"Node {self.node_id}: Granted vote to candidate {request.candidateId} for term {request.term} (tie-breaker)")
+                    return raft_pb2.RequestVoteReply(
+                        term=self.current_term,
+                        voteGranted=True
+                    )
                 else:
                     self.current_term = request.term
                     self.voted_for = request.candidateId
