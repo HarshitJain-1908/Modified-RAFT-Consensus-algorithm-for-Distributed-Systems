@@ -10,6 +10,8 @@ service RaftService {
 
     // RequestVote RPC
     rpc RequestVote (RequestVoteRequest) returns (RequestVoteReply) {}
+
+    rpc ServeClient(ServeClientArgs) returns (ServeClientReply) {}
 }
 
 // AppendEntries RPC messages
@@ -45,4 +47,14 @@ message RequestVoteRequest {
 message RequestVoteReply {
     int32 term = 1;
     bool voteGranted = 2;
+}
+
+message ServeClientArgs {
+  string Request = 1;
+}
+
+message ServeClientReply {
+  string Data = 1;
+  string LeaderID = 2;
+  bool Success = 3;
 }

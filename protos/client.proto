@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package raft;
 
-service RaftService {
+service ClientService {
   // Existing RPC methods
 
   rpc ServeClient(ServeClientArgs) returns (ServeClientReply) {}
