@@ -6,8 +6,7 @@ import raft_pb2 as raft__pb2
 
 
 class RaftServiceStub(object):
-    """RPC service for Raft interactions
-    """
+    """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
         """Constructor.
@@ -15,41 +14,31 @@ class RaftServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ServeClient = channel.unary_unary(
-                '/raft.RaftService/ServeClient',
-                request_serializer=raft__pb2.ServeClientArgs.SerializeToString,
-                response_deserializer=raft__pb2.ServeClientReply.FromString,
-                )
-        self.AppendEntry = channel.unary_unary(
-                '/raft.RaftService/AppendEntry',
-                request_serializer=raft__pb2.AppendEntryArgs.SerializeToString,
-                response_deserializer=raft__pb2.AppendEntryReply.FromString,
+        self.AppendEntries = channel.unary_unary(
+                '/raft.RaftService/AppendEntries',
+                request_serializer=raft__pb2.AppendEntriesRequest.SerializeToString,
+                response_deserializer=raft__pb2.AppendEntriesReply.FromString,
                 )
         self.RequestVote = channel.unary_unary(
                 '/raft.RaftService/RequestVote',
-                request_serializer=raft__pb2.RequestVoteArgs.SerializeToString,
+                request_serializer=raft__pb2.RequestVoteRequest.SerializeToString,
                 response_deserializer=raft__pb2.RequestVoteReply.FromString,
                 )
 
 
 class RaftServiceServicer(object):
-    """RPC service for Raft interactions
-    """
+    """Missing associated documentation comment in .proto file."""
 
-    def ServeClient(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AppendEntry(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def AppendEntries(self, request, context):
+        """AppendEntries RPC
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def RequestVote(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """RequestVote RPC
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -57,19 +46,14 @@ class RaftServiceServicer(object):
 
 def add_RaftServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ServeClient': grpc.unary_unary_rpc_method_handler(
-                    servicer.ServeClient,
-                    request_deserializer=raft__pb2.ServeClientArgs.FromString,
-                    response_serializer=raft__pb2.ServeClientReply.SerializeToString,
-            ),
-            'AppendEntry': grpc.unary_unary_rpc_method_handler(
-                    servicer.AppendEntry,
-                    request_deserializer=raft__pb2.AppendEntryArgs.FromString,
-                    response_serializer=raft__pb2.AppendEntryReply.SerializeToString,
+            'AppendEntries': grpc.unary_unary_rpc_method_handler(
+                    servicer.AppendEntries,
+                    request_deserializer=raft__pb2.AppendEntriesRequest.FromString,
+                    response_serializer=raft__pb2.AppendEntriesReply.SerializeToString,
             ),
             'RequestVote': grpc.unary_unary_rpc_method_handler(
                     servicer.RequestVote,
-                    request_deserializer=raft__pb2.RequestVoteArgs.FromString,
+                    request_deserializer=raft__pb2.RequestVoteRequest.FromString,
                     response_serializer=raft__pb2.RequestVoteReply.SerializeToString,
             ),
     }
@@ -80,11 +64,10 @@ def add_RaftServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class RaftService(object):
-    """RPC service for Raft interactions
-    """
+    """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def ServeClient(request,
+    def AppendEntries(request,
             target,
             options=(),
             channel_credentials=None,
@@ -94,26 +77,9 @@ class RaftService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/raft.RaftService/ServeClient',
-            raft__pb2.ServeClientArgs.SerializeToString,
-            raft__pb2.ServeClientReply.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AppendEntry(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/raft.RaftService/AppendEntry',
-            raft__pb2.AppendEntryArgs.SerializeToString,
-            raft__pb2.AppendEntryReply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/raft.RaftService/AppendEntries',
+            raft__pb2.AppendEntriesRequest.SerializeToString,
+            raft__pb2.AppendEntriesReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -129,7 +95,7 @@ class RaftService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/raft.RaftService/RequestVote',
-            raft__pb2.RequestVoteArgs.SerializeToString,
+            raft__pb2.RequestVoteRequest.SerializeToString,
             raft__pb2.RequestVoteReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
