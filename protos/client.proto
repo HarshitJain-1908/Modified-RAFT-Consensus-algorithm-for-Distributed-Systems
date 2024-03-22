@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package raft;
+
+service RaftService {
+  // Existing RPC methods
+
+  rpc ServeClient(ServeClientArgs) returns (ServeClientReply) {}
+}
+
+message ServeClientArgs {
+  string Request = 1;
+}
+
+message ServeClientReply {
+  string Data = 1;
+  string LeaderID = 2;
+  bool Success = 3;
+}

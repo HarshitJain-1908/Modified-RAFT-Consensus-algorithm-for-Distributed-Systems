@@ -46,6 +46,36 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.next_index[node] = 0
             self.match_index[node] = 0
 
+    def serve_client(self, request):
+        # Acquire the leader lock
+        # with leader_lock:
+        leader_id = self.leader_id
+        leader_address = self.leader_address
+
+        if leader_id is None:
+            return raft_pb2.ServeClientReply(
+                Data="No leader available",
+                LeaderID="",
+                Success=False
+            )
+
+        try:
+            with grpc.insecure_channel(leader_address) as channel:
+                stub = raft_pb2_grpc.RaftServiceStub(channel)
+                reply = stub.ServeClient(request)
+                return reply
+        except grpc.RpcError:
+            return raft_pb2.ServeClientReply(
+                Data="Failed to reach leader",
+                LeaderID="",
+                Success=False
+            )
+
+    def ServeClient(self, request, context):
+        print(request)
+        response = self.serve_client(request)
+        return response
+
     def reset_election_timeout(self):
         self.election_deadline = time.time() + random.uniform(5, 10)
         self.heartbeat_timeout = time.time() + 3
