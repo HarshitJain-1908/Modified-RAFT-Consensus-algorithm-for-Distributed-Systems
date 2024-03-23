@@ -78,7 +78,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         if os.path.exists(metadata_file):
             with open(metadata_file, "r") as f:
                 metadata = f.readline().strip().split()
-                self.commit_length = int(metadata[0])
+                self.commit_index = int(metadata[0])-1
                 self.current_term = int(metadata[1])
                 self.voted_for = int(metadata[2])
         else:
@@ -97,7 +97,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 f.write(f"{entry.term} {entry.command}\n")
 
         with open(metadata_file, "w") as f:
-            f.write(f"{self.commit_length} {self.current_term} {self.voted_for}")
+            f.write(f"{self.commit_index+1} {self.current_term} {self.voted_for}")
 
     def append_log_entry(self,entry):
         log_entry = raft_pb2.LogEntry()
@@ -111,16 +111,22 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.append_log_entry(entry)
 
     def get_key_value(self, key):
-        for term, entry in reversed(self.log):
-            if entry.startswith(f"{term} SET {key}"):
-                return entry.split()[3]
+        print("hi2")
+        print(self.log)
+        for i in reversed(self.log):
+            print(i.term,i.command)
+            if i.command.startswith(f"SET {key}"):
+                return i.command.split()[2]
         return ""
 
     def ServeClient(self, request, context):
-        print(request)  
+        print("Request",request)  
         command = request.Request.split()
-        key, value = command[1], command[2]
+        print("Command",command)
+        
+        # print("Key Value",key, value)
         if command[0] == "SET":
+            key, value = command[1], command[2]
             self.set_key_value(key, value)
             return raft_pb2.ServeClientReply(
                 Data="SUCCESS",
@@ -128,7 +134,10 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 Success=True
             )
         elif command[0] == "GET":
+            key = command[1]
+            print("hi")
             value = self.get_key_value(key)
+            print("hi3")
             return raft_pb2.ServeClientReply(
                 Data=value,
                 LeaderID=str(self.leader_id),
@@ -425,7 +434,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             print(f"Node {self.node_id}: Committed entries up to index {self.commit_index}")
 
         self.apply_committed_entries(committed_entries)
-
+        self.save_logs()
         print(f"Node {self.node_id}: Appended entries from leader {request.leaderId}")
 
         return raft_pb2.AppendEntriesReply(
