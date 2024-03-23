@@ -65,7 +65,10 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             with open(log_file, "r") as f:
                 for line in f:
                     term, command = line.strip().split(" ", 1)
-                    self.log.append((int(term), command))
+                    log_entry = raft_pb2.LogEntry()
+                    log_entry.term = int(term)
+                    log_entry.command = command
+                    self.log.append(log_entry)
         else:
             self.log = []
 
@@ -90,14 +93,17 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         metadata_file = os.path.join(self.logs_dir, "metadata.txt")
 
         with open(log_file, "w") as f:
-            for term, command in self.log:
-                f.write(f"{term} {command}\n")
+            for entry in self.log:
+                f.write(f"{entry.term} {entry.command}\n")
 
         with open(metadata_file, "w") as f:
             f.write(f"{self.commit_length} {self.current_term} {self.voted_for}")
 
     def append_log_entry(self,entry):
-        self.log.append((self.current_term,entry))
+        log_entry = raft_pb2.LogEntry()
+        log_entry.term = self.current_term
+        log_entry.command = entry
+        self.log.append(log_entry)
         self.save_logs()
 
     def set_key_value(self, key, value):
