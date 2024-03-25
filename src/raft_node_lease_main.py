@@ -92,7 +92,12 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.current_term = 0
             self.voted_for = None
 
+
+    def add_to_dump(self, entry):
         dump_file = os.path.join(self.logs_dir, "dump.txt")
+        with open(dump_file, "a") as f:
+            f.write(f"{entry}\n")
+
 
     def save_logs(self):
         log_file = os.path.join(self.logs_dir, "logs.txt")
@@ -180,6 +185,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
     def follower_routine(self):
         if time.time() >= self.election_deadline:
             print(f"Node {self.node_id}: Election timeout, becoming candidate from follower at time: {time.time()}")
+            self.add_to_dump(f"Node {self.node_id} election timer timed out, Starting election")
             self.become_candidate()
             return
 
@@ -224,14 +230,17 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                     if reply.voteGranted:
                         votes += 1
                         print(f"Node {self.node_id}: Received vote from {node}")
+
                         self.max_old_leader_lease = max(self.max_old_leader_lease, reply.oldLeaderLeaseDuration)
                         if votes > len(self.cluster_nodes) // 2:
                             print(f"Node {self.node_id}: Received majority votes, becoming leader")
+                            self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
                             self.become_leader()
                             return
                 except grpc.RpcError:
                     vote_requests_sent += 1
                     print(f"Node {self.node_id}: Failed to send RequestVote to {node}, retrying later")
+                    self.add_to_dump(f"Error occurred while sending RPC to Node {node}")
 
         # If no leader was elected and all vote requests were sent, check for election timeout
         while time.time() < self.election_deadline:
@@ -241,6 +250,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         if vote_requests_sent == len(self.cluster_nodes) - 1:
             if time.time() >= self.election_deadline:
                 print(f"Node {self.node_id}: Election timeout, starting new election at time: {time.time()}")
+                self.add_to_dump(f"Node {self.node_id} election timer timed out, Starting election.")
                 self.become_candidate()
 
 
@@ -282,6 +292,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 except grpc.RpcError as e:
                     vote_requests_sent += 1
                     print(f"Node {self.node_id}: Failed to send RequestVote to {node}, retrying later")
+                    self.add_to_dump(f"Error occurred while sending RPC to Node {node}")
                     
 
         # If no leader was elected and all vote requests were sent, check for election timeout
@@ -291,6 +302,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         if vote_requests_sent == len(self.cluster_nodes) - 1:
             if time.time() >= self.election_deadline:
                 print(f"Node {self.node_id}: Election timeout, starting new election at time {time.time()}")
+                self.add_to_dump(f"Node {self.node_id} election timer timed out, Starting election.")
                 self.become_candidate()
 
     def request_vote(self, node, request):
@@ -307,6 +319,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
 
         print(f"Node {self.node_id}: Became leader for term {self.current_term}")
         print(f"New Leader waiting for Old Leader Lease to timeout at time {self.lease_timeout}")
+        self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
 
         for node in self.cluster_nodes:
             self.next_index[node] = len(self.log)
@@ -341,6 +354,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.handle_append_entries_response(node, reply)
         except grpc.RpcError:
             print(f"Node {self.node_id}: Failed to send AppendEntries to {node}, decrementing next index at time {time.time()}")
+            self.add_to_dump(f"Error occurred while sending RPC to Node {node}")
             self.next_index[node] -= 1
 
     def append_entries(self, node, request):
@@ -379,6 +393,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
 
             if committed_entries:
                 print(f"Node {self.node_id}: Committed entries up to index {self.commit_index}")
+                if self.node_id == self.leader_id:
+                    self.add_to_dump(f"Node {self.node_id} (leader) committed the entry {self.log[self.commit_index].command} to the state machine.")
 
             self.apply_committed_entries(committed_entries)
 
@@ -397,13 +413,15 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             # Apply the committed entry to the state machine
 
     def leader_routine(self):
-        if time.time() >= self.election_deadline:
-            print(f"Node {self.node_id}: Election timeout, becoming follower")
-            self.become_follower()
-            return
+        # if time.time() >= self.election_deadline:
+        #     print(f"Node {self.node_id}: Election timeout, becoming follower")
+        #     self.add_to_dump(f"Node {self.node_id} election timer timed out, Starting election.")
+        #     self.become_follower()
+        #     return
 
         if time.time() >= self.heartbeat_timeout:
             print(f"Node {self.node_id}: Sending heartbeat to cluster")
+            self.add_to_dump(f"Leader {self.node_id} sending heartbeat & Renewing Lease")
             self.reset_election_timeout()
             self.broadcast_append_entries(lease_duration=LEASE_DURATION)
             
@@ -411,6 +429,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             
         if time.time() >= self.lease_timeout:
             print(f"Leader {self.node_id} lease renewal failed. Stepping Down.")
+            self.add_to_dump(f"Leader {self.node_id} lease renewal failed. Stepping Down.")
             self.become_follower()
             
 
@@ -423,6 +442,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         # called on follower
         if request.term < self.current_term:
             print(f"Node {self.node_id}: Received AppendEntries request with stale term {request.term}, rejecting")
+            self.add_to_dump(f"Node {self.node_id} rejected AppendEntries RPC from {self.leader_id}.")
             return raft_pb2.AppendEntriesReply(
                 term=self.current_term,
                 success=False,
@@ -453,6 +473,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             first_index += 1
             # first_index: index of the first log entry in the conflicting term
             print(f"Node {self.node_id}: Received conflicting entries from leader, sending conflict term {conflict_term} and first index {first_index}")
+            self.add_to_dump(f"Node {self.node_id} rejected AppendEntries RPC from {self.leader_id}.")
 
             return raft_pb2.AppendEntriesReply(
                 term=self.current_term,
@@ -471,11 +492,12 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
 
         if committed_entries:
             print(f"Node {self.node_id}: Committed entries up to index {self.commit_index}")
+            self.add_to_dump(f"Node {self.node_id} committed the entry {self.log[self.commit_index].command} to the state machine.")
 
         self.apply_committed_entries(committed_entries)
         self.save_logs()
         print(f"Node {self.node_id}: Appended entries from leader {request.leaderId}")
-
+        self.add_to_dump(f"Node {self.node_id} accepted AppendEntries RPC from {request.leaderId}.")
         if request.leaseDuration is not None:
             self.lease_timeout = time.time() + request.leaseDuration
 
@@ -516,6 +538,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                     self.voted_for = request.candidateId
                     self.reset_election_timeout()
                     print(f"Node {self.node_id}: Granted vote to candidate {request.candidateId} for term {request.term} (tie-breaker)")
+                    self.add_to_dump(f"Vote granted for Node {request.candidateId} in term {request.term}.")
                     return raft_pb2.RequestVoteReply(
                         term=self.current_term,
                         voteGranted=True,
@@ -526,6 +549,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                     self.voted_for = request.candidateId
                     self.reset_election_timeout()
                     print(f"Node {self.node_id}: Granted vote to candidate {request.candidateId} for term {request.term}")
+                    self.add_to_dump(f"Vote granted for Node {request.candidateId} in term {request.term}.")
                     return raft_pb2.RequestVoteReply(
                         term=self.current_term,
                         voteGranted=True,
@@ -533,6 +557,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                     )
                     
         print(f"Node {self.node_id}: Rejected vote request from candidate {request.candidateId} for term {request.term} at time {time.time()}")
+        self.add_to_dump(f"Vote denied for Node {request.candidateId} in term {request.term}.")
         #print(f"Node {self.node_id}: Last log term: {last_log_term}, last log index: {last_log_index}")
         print(f"Candidate's log term, log index {request.lastLogTerm}, {request.lastLogIndex}")
         print(f"{self.voted_for} ")
