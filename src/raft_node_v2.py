@@ -21,6 +21,8 @@ LEADER = 2
 REGULAR = 0
 BOOTSTRAP = 1
 
+LEASE_DURATION = 5
+
 def get_id(s):
     return int(s.split('localhost:')[1]) - 5000
 
@@ -113,7 +115,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
     def get_key_value(self, key):
         print("hi2")
         print(self.log)
-        for i in reversed(self.log):
+        for i in reversed(self.log[:self.commit_index+1]):
             print(i.term,i.command)
             if i.command.startswith(f"SET {key}"):
                 return i.command.split()[2]
@@ -301,7 +303,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         for node in self.cluster_nodes:
             self.next_index[node] = len(self.log)
             self.match_index[node] = 0
-
+        self.log.append(raft_pb2.LogEntry(term=self.current_term, command="NO-OP"))
         self.broadcast_append_entries()
 
     def broadcast_append_entries(self):
@@ -416,11 +418,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         
 
         prev_log_index = request.prevLogIndex
-        try:
-            prev_log_term = self.log[prev_log_index].term if prev_log_index >= 0 else 0
-        except:
-            pass
-            #print("prev_log_index", prev_log_index, 'len(self.log)', len(self.log), "time", time.time())
+        prev_log_term = self.log[prev_log_index].term if prev_log_index >= 0 else 0
+        #print("prev_log_index", prev_log_index, 'len(self.log)', len(self.log), "time", time.time())
 
         if prev_log_term != request.prevLogTerm:
             conflict_term = self.log[prev_log_index].term if prev_log_index >= 0 else -1
