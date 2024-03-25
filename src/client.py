@@ -8,7 +8,7 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
     def __init__(self, node_addresses):
         self.node_addresses = node_addresses
         print(self.node_addresses)
-        self.current_leader_id = 0
+        self.current_leader_id = 1
 
     def set_leader_id(self, leader_id):
         self.current_leader_id = leader_id
@@ -25,7 +25,7 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
             with grpc.insecure_channel(self.node_addresses[self.current_leader_id]) as channel:
                 stub = raft_pb2_grpc.RaftServiceStub(channel)
                 print(request)
-                print(dir(stub))
+                #print(dir(stub))
                 reply = stub.ServeClient(raft_pb2.ServeClientArgs(Request=request))
                 # print(reply.Data, reply.LeaderID, reply.Success)
                 return reply.Data, reply.LeaderID, reply.Success
@@ -40,7 +40,8 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
             if success:
                 return data
             else:
-                self.set_leader_id(leader_id)
+                print("Updating leader to ", leader_id)
+                self.set_leader_id(int(leader_id))
 
     def set_key_value(self, key, value):
         request = f"SET {key} {value}"

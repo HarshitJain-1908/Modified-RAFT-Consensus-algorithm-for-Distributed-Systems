@@ -124,9 +124,17 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         command = request.Request.split()
         print("Command",command)
         
+        if self.node_id != self.leader_id:
+            return raft_pb2.ServeClientReply(
+                Data="I am not the leader",
+                LeaderID=str(self.leader_id),
+                Success=False
+            )
+        
         # print("Key Value",key, value)
         if command[0] == "SET":
             key, value = command[1], command[2]
+            print("set called")
             self.set_key_value(key, value)
             return raft_pb2.ServeClientReply(
                 Data="SUCCESS",
@@ -302,6 +310,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 self.send_append_entries(node)
 
     def send_append_entries(self, node):
+        print("next index", self.next_index[node])
         prev_log_index = self.next_index[node] - 1
         prev_log_term = self.log[prev_log_index].term if prev_log_index >= 0 else 0
         entries = self.log[self.next_index[node]:]
@@ -332,6 +341,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
     def handle_append_entries_response(self, node, reply):
         if reply.success:
             self.match_index[node] = len(self.log) - 1
+            #print(f"next_index{node} = {self.next_index[node]}; len(self.log) = {len(self.log)}, time: {time.time()}")
             self.next_index[node] = len(self.log)
 
             committed_entries = []
@@ -345,6 +355,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                     if replicated > len(self.cluster_nodes) // 2:
                         self.commit_index = i
                         committed_entries.append(self.log[i])
+                        self.save_logs()
 
             if committed_entries:
                 print(f"Node {self.node_id}: Committed entries up to index {self.commit_index}")
@@ -383,6 +394,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.reset_election_timeout()
 
     def AppendEntries(self, request, context):
+        # called on follower
         if request.term < self.current_term:
             print(f"Node {self.node_id}: Received AppendEntries request with stale term {request.term}, rejecting")
             return raft_pb2.AppendEntriesReply(
@@ -401,10 +413,14 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.become_follower()
 
         self.reset_election_timeout()
-        print("2:", self.heartbeat_timeout)
+        
 
         prev_log_index = request.prevLogIndex
-        prev_log_term = self.log[prev_log_index].term if prev_log_index >= 0 else 0
+        try:
+            prev_log_term = self.log[prev_log_index].term if prev_log_index >= 0 else 0
+        except:
+            pass
+            #print("prev_log_index", prev_log_index, 'len(self.log)', len(self.log), "time", time.time())
 
         if prev_log_term != request.prevLogTerm:
             conflict_term = self.log[prev_log_index].term if prev_log_index >= 0 else -1
@@ -412,7 +428,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             while first_index >= 0 and self.log[first_index].term == conflict_term:
                 first_index -= 1
             first_index += 1
-
+            # first_index: index of the first log entry in the conflicting term
             print(f"Node {self.node_id}: Received conflicting entries from leader, sending conflict term {conflict_term} and first index {first_index}")
 
             return raft_pb2.AppendEntriesReply(
@@ -422,8 +438,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 firstIndexOfConflictTerm=first_index
             )
 
-        self.log = self.log[:prev_log_index + 1]
-        self.log.extend(request.entries)
+        self.log = self.log[:prev_log_index + 1] # for deleting
+        self.log.extend(request.entries) # for appending new entries
         self.commit_index = min(request.leaderCommit, len(self.log) - 1)
 
         committed_entries = []
