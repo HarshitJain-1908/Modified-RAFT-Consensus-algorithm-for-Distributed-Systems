@@ -37,7 +37,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.voted_for = None
         self.log = []
 
-        self.commit_index = 0
+        self.commit_index = -1
         self.last_applied = 0
 
         self.state = FOLLOWER

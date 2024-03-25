@@ -22,6 +22,7 @@ message AppendEntriesRequest {
     int32 prevLogTerm = 4;
     repeated LogEntry entries = 5;
     int32 leaderCommit = 6;
+    int32 leaseDuration = 7;
 }
 
 message AppendEntriesReply {
@@ -47,6 +48,7 @@ message RequestVoteRequest {
 message RequestVoteReply {
     int32 term = 1;
     bool voteGranted = 2;
+    int32 oldLeaderLeaseDuration = 3;
 }
 
 message ServeClientArgs {
