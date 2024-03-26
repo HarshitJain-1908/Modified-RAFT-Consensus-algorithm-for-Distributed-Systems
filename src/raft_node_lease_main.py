@@ -24,15 +24,19 @@ BOOTSTRAP = 1
 
 LEASE_DURATION = 10
 
-def get_id(s):
-    return int(s.split('localhost:')[1]) - 5000
+# def get_id(s):
+#     return int(s.split(addr)[1]) - 5000
 
 class RaftNode(raft_pb2_grpc.RaftServiceServicer):
-    def __init__(self, node_id, cluster_nodes, node_role=REGULAR):
+    def __init__(self, node_id, cluster_nodes, port, node_role=REGULAR):
         self.node_id = node_id
-        self.cluster_nodes = cluster_nodes
-        self.node_role = node_role
+        self.port = port
         
+        self.cluster_nodes = {}  # This will be a dictionary mapping node IDs to their addresses
+        for idx, addr in enumerate(cluster_nodes):
+            self.cluster_nodes[idx] = addr
+
+        self.node_role = node_role
 
         self.current_term = 0
         self.voted_for = None
@@ -219,8 +223,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         vote_requests_sent = 0
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = []
-            for node in self.cluster_nodes:
-                if get_id(node) != self.node_id:
+            for node_id, node_address in self.cluster_nodes.items():
+                if node_id != self.node_id:
                     try:
                         request = raft_pb2.RequestVoteRequest(
                             term=self.current_term,
@@ -229,7 +233,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                             lastLogTerm=last_log_term
                         )
                         # Submit the task to the thread pool
-                        futures.append(executor.submit(self.request_vote, node, request))
+                        futures.append(executor.submit(self.request_vote, node_id, request))
                     except Exception as e:
                         print("Hello error:",e)
                         # Submit the task to the thread pool
@@ -247,7 +251,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                     vote_requests_sent += 1
                     if reply.voteGranted:
                         votes += 1
-                        print(f"Node {self.node_id}: Received vote from {node}")
+                        print(f"Node {self.node_id}: Received vote from {node_id}")
                         self.max_old_leader_lease = max(self.max_old_leader_lease, reply.oldLeaderLeaseDuration)                        
                         if votes > len(self.cluster_nodes) // 2:
                             print(f"Node {self.node_id}: Received majority votes, becoming leader")
@@ -257,8 +261,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 except grpc.RpcError as e:
                     print(e)
                     vote_requests_sent += 1
-                    print(f"Node {self.node_id}: Failed to send RequestVote to {node}, retrying later")
-                    self.add_to_dump(f"Error occurred while sending RPC to Node {node}")
+                    print(f"Node {self.node_id}: Failed to send RequestVote to {node_id}, retrying later")
+                    self.add_to_dump(f"Error occurred while sending RPC to Node {node_id}")
             # If no leader was elected and all vote requests were sent, check for election timeout
             while time.time() < self.election_deadline:
                 pass
@@ -538,36 +542,61 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             oldLeaderLeaseDuration=0
         )
 
-def serve(node_id, cluster_nodes):
-    node = RaftNode(node_id, cluster_nodes)
+def serve(node_id, cluster_node_addresses, port):
+    node = RaftNode(node_id, cluster_node_addresses, port)
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     raft_pb2_grpc.add_RaftServiceServicer_to_server(node, server)
-    server.add_insecure_port(f'[::]:{node_id + 5000}')
-    print(f"Node {node_id}: Starting server on port {node_id + 5000}")
+
+    server.add_insecure_port(f'[::]:{port}')
+    print(f"Node {node_id}: Starting server on port {port}")
     server.start()
 
     try:
         node.run()
     except KeyboardInterrupt:
+        print("Shutting down...")
         server.stop(0)
-
-    server.wait_for_termination()
-
-def signal_handler(sig, frame):
-    print("Received SIGINT signal, stopping servers...")
-    for server in servers:
-        server.stop(0)
-    print("Servers stopped.")
-    sys.exit(0)
 
 if __name__ == '__main__':
-    signal.signal(signal.SIGINT, signal_handler)
-    servers = []
-
     parser = argparse.ArgumentParser(description='Raft Node')
     parser.add_argument('node_id', type=int, help='Node ID')
-    parser.add_argument('cluster_nodes', nargs='+', help='Cluster node addresses')
+    parser.add_argument('port', type=int, help='Port number on which the node will listen')
+    parser.add_argument('cluster_node_addresses', nargs='+', help='Cluster node addresses in the format ip:port')
     args = parser.parse_args()
 
-    all_nodes = [int(i.split('localhost:')[1]) - 5000 for i in args.cluster_nodes]
-    serve(args.node_id, args.cluster_nodes)
+    # Start the server with the provided node ID, cluster node addresses, and port
+    serve(args.node_id, args.cluster_node_addresses, args.port)
+
+# def serve(node_id, cluster_nodes):
+#     node = RaftNode(node_id, cluster_nodes)
+#     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+#     raft_pb2_grpc.add_RaftServiceServicer_to_server(node, server)
+#     server.add_insecure_port(f'[::]:{node_id + 5000}')
+#     print(f"Node {node_id}: Starting server on port {node_id + 5000}")
+#     server.start()
+
+#     try:
+#         node.run()
+#     except KeyboardInterrupt:
+#         server.stop(0)
+
+#     server.wait_for_termination()
+
+# def signal_handler(sig, frame):
+#     print("Received SIGINT signal, stopping servers...")
+#     for server in servers:
+#         server.stop(0)
+#     print("Servers stopped.")
+#     sys.exit(0)
+
+# if __name__ == '__main__':
+#     signal.signal(signal.SIGINT, signal_handler)
+#     servers = []
+
+#     parser = argparse.ArgumentParser(description='Raft Node')
+#     parser.add_argument('node_id', type=int, help='Node ID')
+#     parser.add_argument('cluster_nodes', nargs='+', help='Cluster node addresses')
+#     args = parser.parse_args()
+
+#     all_nodes = [int(i.split(addr)[1]) - 5000 for i in args.cluster_nodes]
+#     serve(args.node_id, args.cluster_nodes)
