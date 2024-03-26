@@ -651,3 +651,619 @@ Node 1 accepted AppendEntries RPC from 0.
 Node 1 accepted AppendEntries RPC from 0.
 Node 1 accepted AppendEntries RPC from 0.
 Node 1 accepted AppendEntries RPC from 0.
+Vote granted for Node 0 in term 19.
+Node 1 committed the entry NO-OP to the state machine.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 committed the entry NO-OP to the state machine.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 committed the entry SET y 2000 to the state machine.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 committed the entry SET x 2000 to the state machine.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Node 1 accepted AppendEntries RPC from 0.
+Vote granted for Node 2 in term 20.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 committed the entry NO-OP to the state machine.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 accepted AppendEntries RPC from 2.
+Node 1 election timer timed out, Starting election
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 1 election timer timed out, Starting election.
+New Leader waiting for Old Leader Lease to timeout.
+New Leader waiting for Old Leader Lease to timeout.
+Error occurred while sending RPC to Node localhost:5000
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Node 1 (leader) committed the entry NO-OP to the state machine.
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Leader 1 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Leader 1 sending heartbeat & Renewing Lease
+Leader 1 sending heartbeat & Renewing Lease

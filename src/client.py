@@ -18,6 +18,7 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
         return self.current_leader_id
 
     def send_request_to_leader(self, request):
+        print("Current leader ID: ", self.current_leader_id)
         if self.current_leader_id is None:
             return None, "No leader available"
 
@@ -46,10 +47,10 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
                     print("Leader not reachable. Retrying with random node ", leader_id)
                     print("Updating leader to ", leader_id)
                     self.set_leader_id(leader_id)
-                elif leader_id is not None:
+                elif leader_id!= "None":
                     print("Updating leader to ", leader_id)
                     self.set_leader_id(int(leader_id))
-                elif leader_id is None:
+                elif leader_id == "None":
                     print("No leader available in the system. Retrying...")
                 else:
                     print("Something is wrong. Retrying...")
