@@ -221,14 +221,21 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             futures = []
             for node in self.cluster_nodes:
                 if get_id(node) != self.node_id:
-                    request = raft_pb2.RequestVoteRequest(
-                        term=self.current_term,
-                        candidateId=self.node_id,
-                        lastLogIndex=last_log_index,
-                        lastLogTerm=last_log_term
-                    )
-                    # Submit the task to the thread pool
-                    futures.append(executor.submit(self.request_vote, node, request))
+                    try:
+                        request = raft_pb2.RequestVoteRequest(
+                            term=self.current_term,
+                            candidateId=self.node_id,
+                            lastLogIndex=last_log_index,
+                            lastLogTerm=last_log_term
+                        )
+                        # Submit the task to the thread pool
+                        futures.append(executor.submit(self.request_vote, node, request))
+                    except Exception as e:
+                        print("Hello error:",e)
+                        # Submit the task to the thread pool
+                        # futures.append(executor.submit(self.request_vote, node, request))
+                    
+            # time.sleep(0.7)
             print("futures1", futures)
             concurrent.futures.wait(futures)
             print("futures", futures)
@@ -263,9 +270,14 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 self.become_candidate()
 
     def request_vote(self, node, request):
+        # try:
+            #time.sleep(random.uniform(0.05, 0.1))
         with grpc.insecure_channel(node) as channel:
             stub = raft_pb2_grpc.RaftServiceStub(channel)
             return stub.RequestVote(request)
+        # except grpc.RpcError as e:
+        #     print("E:",e)
+        #     return "abc"
 
     def become_leader(self):
         self.state = LEADER
