@@ -42,11 +42,18 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
                 return data
             else:
                 if leader_id == "Failed to reach leader":
-                    prev_leader_id = self.get_leader_id()
-                    self.set_leader_id(random.randint(0, len(self.node_addresses)-1))
-                    leader_id = self.get_leader_id()
-                print("Updating leader to ", leader_id)
-                #self.set_leader_id(int(leader_id))
+                    leader_id = random.randint(0, len(self.node_addresses)-1)
+                    print("Leader not reachable. Retrying with random node ", leader_id)
+                    print("Updating leader to ", leader_id)
+                    self.set_leader_id(leader_id)
+                elif leader_id is not None:
+                    print("Updating leader to ", leader_id)
+                    self.set_leader_id(int(leader_id))
+                elif leader_id is None:
+                    print("No leader available in the system. Retrying...")
+                else:
+                    print("Something is wrong. Retrying...")
+                    
 
     def set_key_value(self, key, value):
         request = f"SET {key} {value}"
