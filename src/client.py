@@ -1,6 +1,7 @@
 import grpc
 import raft_pb2
 import raft_pb2_grpc
+import random
 
 import argparse
 
@@ -40,8 +41,12 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
             if success:
                 return data
             else:
+                if leader_id == "Failed to reach leader":
+                    prev_leader_id = self.get_leader_id()
+                    self.set_leader_id(random.randint(0, len(self.node_addresses)-1))
+                    leader_id = self.get_leader_id()
                 print("Updating leader to ", leader_id)
-                self.set_leader_id(int(leader_id))
+                #self.set_leader_id(int(leader_id))
 
     def set_key_value(self, key, value):
         request = f"SET {key} {value}"
