@@ -462,3 +462,430 @@ Leader 0 sending heartbeat & Renewing Lease
 Leader 0 sending heartbeat & Renewing Lease
 Leader 0 sending heartbeat & Renewing Lease
 Leader 0 sending heartbeat & Renewing Lease
+Node 0 election timer timed out, Starting election
+New Leader waiting for Old Leader Lease to timeout.
+New Leader waiting for Old Leader Lease to timeout.
+Node 0 (leader) committed the entry NO-OP to the state machine.
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Node 0 (leader) committed the entry SET y 2000 to the state machine.
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Node 0 (leader) committed the entry SET x 2000 to the state machine.
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Vote granted for Node 1 in term 91.
+Node 0 committed the entry NO-OP to the state machine.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 committed the entry NO-OP to the state machine.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 accepted AppendEntries RPC from 1.
+Node 0 election timer timed out, Starting election
+Error occurred while sending RPC to Node localhost:5002
+New Leader waiting for Old Leader Lease to timeout.
+New Leader waiting for Old Leader Lease to timeout.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Node 0 (leader) committed the entry NO-OP to the state machine.
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Node 0 (leader) committed the entry SET x 3000 to the state machine.
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Error occurred while sending RPC to Node localhost:5002
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5001
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5001
+Error occurred while sending RPC to Node localhost:5002
+Leader 0 lease renewal failed. Stepping Down.
+Node 0 election timer timed out, Starting election
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 0 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 0 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 0 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 0 election timer timed out, Starting election.
+Error occurred while sending RPC to Node localhost:5002
+Error occurred while sending RPC to Node localhost:5002
+Node 0 election timer timed out, Starting election.
