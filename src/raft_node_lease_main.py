@@ -6,6 +6,7 @@ import argparse
 import signal
 import sys
 import os
+import concurrent.futures
 
 import raft_pb2
 import raft_pb2_grpc
@@ -196,63 +197,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         #         self.become_candidate()
         #         return
             
-            
-    def candidate_routine(self):
         
-        self.state = CANDIDATE
-        self.current_term += 1
-        self.voted_for = self.node_id
-        self.leader_id = None
-        self.reset_election_timeout()
-        self.max_old_leader_lease = 0
-
-        print(f"Node {self.node_id}: Became candidate for term {self.current_term}")
-
-        votes = 1
-        last_log_index = len(self.log) - 1
-        last_log_term = self.log[-1].term if self.log else 0
-        print("hi2")
-        #
-        # time.sleep(random.uniform(0.05, 0.1))
-
-        vote_requests_sent = 0
-        for node in self.cluster_nodes:
-            if get_id(node) != self.node_id:
-                request = raft_pb2.RequestVoteRequest(
-                    term=self.current_term,
-                    candidateId=self.node_id,
-                    lastLogIndex=last_log_index,
-                    lastLogTerm=last_log_term
-                )
-                try:
-                    reply = self.request_vote(node, request)
-                    vote_requests_sent += 1
-                    if reply.voteGranted:
-                        votes += 1
-                        print(f"Node {self.node_id}: Received vote from {node}")
-
-                        self.max_old_leader_lease = max(self.max_old_leader_lease, reply.oldLeaderLeaseDuration)
-                        if votes > len(self.cluster_nodes) // 2:
-                            print(f"Node {self.node_id}: Received majority votes, becoming leader")
-                            self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
-                            self.become_leader()
-                            return
-                except grpc.RpcError:
-                    vote_requests_sent += 1
-                    print(f"Node {self.node_id}: Failed to send RequestVote to {node}, retrying later")
-                    self.add_to_dump(f"Error occurred while sending RPC to Node {node}")
-
-        # If no leader was elected and all vote requests were sent, check for election timeout
-        while time.time() < self.election_deadline:
-            print("hi")
-            pass
-        
-        if vote_requests_sent == len(self.cluster_nodes) - 1:
-            if time.time() >= self.election_deadline:
-                print(f"Node {self.node_id}: Election timeout, starting new election at time: {time.time()}")
-                self.add_to_dump(f"Node {self.node_id} election timer timed out, Starting election.")
-                self.become_candidate()
-
 
 
     def become_candidate(self):
@@ -261,6 +206,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.voted_for = self.node_id
         self.leader_id = None
         self.reset_election_timeout()
+        self.max_old_leader_lease = 0
 
         print(f"Node {self.node_id}: Became candidate for term {self.current_term} at time {time.time()}")
 
@@ -271,33 +217,44 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         # time.sleep(random.uniform(0.05, 0.1))
 
         vote_requests_sent = 0
-        for node in self.cluster_nodes:
-            if get_id(node) != self.node_id:
-                request = raft_pb2.RequestVoteRequest(
-                    term=self.current_term,
-                    candidateId=self.node_id,
-                    lastLogIndex=last_log_index,
-                    lastLogTerm=last_log_term
-                )
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = []
+            for node in self.cluster_nodes:
+                if get_id(node) != self.node_id:
+                    request = raft_pb2.RequestVoteRequest(
+                        term=self.current_term,
+                        candidateId=self.node_id,
+                        lastLogIndex=last_log_index,
+                        lastLogTerm=last_log_term
+                    )
+                    # Submit the task to the thread pool
+                    futures.append(executor.submit(self.request_vote, node, request))
+            print("futures1", futures)
+            concurrent.futures.wait(futures)
+            print("futures", futures)
+            for future in (futures):
+                print("we are in future")
                 try:
-                    reply = self.request_vote(node, request)
+                    reply = future.result()
+                    print("reply", reply)
                     vote_requests_sent += 1
                     if reply.voteGranted:
                         votes += 1
                         print(f"Node {self.node_id}: Received vote from {node}")
+                        self.max_old_leader_lease = max(self.max_old_leader_lease, reply.oldLeaderLeaseDuration)                        
                         if votes > len(self.cluster_nodes) // 2:
                             print(f"Node {self.node_id}: Received majority votes, becoming leader")
+                            self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
                             self.become_leader()
                             return
                 except grpc.RpcError as e:
+                    print(e)
                     vote_requests_sent += 1
                     print(f"Node {self.node_id}: Failed to send RequestVote to {node}, retrying later")
                     self.add_to_dump(f"Error occurred while sending RPC to Node {node}")
-                    
-
-        # If no leader was elected and all vote requests were sent, check for election timeout
-        while time.time() < self.election_deadline:
-            pass
+            # If no leader was elected and all vote requests were sent, check for election timeout
+            while time.time() < self.election_deadline:
+                pass
         
         if vote_requests_sent == len(self.cluster_nodes) - 1:
             if time.time() >= self.election_deadline:
@@ -328,9 +285,11 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.broadcast_append_entries(lease_duration=LEASE_DURATION)
 
     def broadcast_append_entries(self, lease_duration=None):
-        for node in self.cluster_nodes:
-            if get_id(node) != self.node_id:
-                self.send_append_entries(node, lease_duration)
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            for node in self.cluster_nodes:
+                if get_id(node) != self.node_id:
+                    # Submit the task to the thread pool
+                    executor.submit(self.send_append_entries, node, lease_duration)
 
     def send_append_entries(self, node, lease_duration=None):
         prev_log_index = self.next_index[node] - 1
