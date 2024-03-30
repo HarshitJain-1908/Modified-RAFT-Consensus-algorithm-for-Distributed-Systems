@@ -151,7 +151,11 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         if command[0] == "SET":
             key, value = command[1], command[2]
             print("set called")
+            prev_commit_index = self.commit_index
             self.set_key_value(key, value)
+            while self.commit_index == prev_commit_index:
+                pass
+            
             return raft_pb2.ServeClientReply(
                 Data="SUCCESS",
                 LeaderID=str(self.leader_id),
@@ -255,7 +259,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                         self.max_old_leader_lease = max(self.max_old_leader_lease, reply.oldLeaderLeaseDuration)                        
                         if votes > len(self.cluster_nodes) // 2:
                             print(f"Node {self.node_id}: Received majority votes, becoming leader")
-                            self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
+                            if self.max_old_leader_lease > 0:
+                                self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
                             self.become_leader()
                             return
                 except grpc.RpcError as e:
@@ -291,8 +296,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.lease_timeout = time.time() + max(self.max_old_leader_lease, LEASE_DURATION)
 
         print(f"Node {self.node_id}: Became leader for term {self.current_term}")
-        print(f"New Leader waiting for Old Leader Lease to timeout at time {self.lease_timeout}")
-        self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
+        #print(f"New Leader waiting for Old Leader Lease to timeout at time {self.lease_timeout}")
+        #self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
 
         for node in self.cluster_nodes:
             self.next_index[node] = len(self.log)
