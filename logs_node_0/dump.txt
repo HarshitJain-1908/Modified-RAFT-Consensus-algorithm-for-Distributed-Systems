@@ -862,3 +862,68 @@ Node 0 accepted AppendEntries RPC from 1.
 Node 0 accepted AppendEntries RPC from 1.
 Node 0 accepted AppendEntries RPC from 1.
 Node 0 accepted AppendEntries RPC from 1.
+Node 0 election timer timed out, Starting election
+Error occurred while sending RPC to Node localhost:5003
+Error occurred while sending RPC to Node localhost:5003
+Node 0 election timer timed out, Starting election.
+Node 0 (leader) committed the entry NO-OP to the state machine.
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Vote denied for Node 3 in term 51.
+Vote denied for Node 3 in term 52.
+Vote granted for Node 2 in term 53.
+Node 0 committed the entry NO-OP to the state machine.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 committed the entry NO-OP to the state machine.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 accepted AppendEntries RPC from 2.
+Node 0 election timer timed out, Starting election
+Node 0 (leader) committed the entry NO-OP to the state machine.
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node localhost:5003
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease
+Leader 0 sending heartbeat & Renewing Lease

@@ -95,7 +95,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 metadata = f.readline().strip().split()
                 self.commit_index = int(metadata[0])-1
                 self.current_term = int(metadata[1])
-                self.voted_for = int(metadata[2])
+                self.voted_for = int(metadata[2]) if metadata[2] != "None" else None
         else:
             self.commit_length = 0
             self.current_term = 0
@@ -159,7 +159,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.set_key_value(key, value)
             while self.commit_index == prev_commit_index:
                 pass
-            
+            self.add_to_dump(f"Node {self.node_id} (leader) received an RPC to set key {key} to value {value}")
             return raft_pb2.ServeClientReply(
                 Data="SUCCESS",
                 LeaderID=str(self.leader_id),
@@ -167,9 +167,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             )
         elif command[0] == "GET":
             key = command[1]
-            print("hi")
             value = self.get_key_value(key)
-            print("hi3")
+            self.add_to_dump(f"Node {self.node_id} (leader) received an RPC to get value of key {key}")
             return raft_pb2.ServeClientReply(
                 Data=value,
                 LeaderID=str(self.leader_id),
