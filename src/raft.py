@@ -59,6 +59,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         
         self.lease_timeout = None
         self.max_old_leader_lease = 0
+        self.max_old_leader_lease_till = 0
 
         
         LOGS_DIR = f"logs_node_{self.node_id}"
@@ -159,6 +160,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.set_key_value(key, value)
             while self.commit_index == prev_commit_index:
                 pass
+            while time.time() < self.max_old_leader_lease_till:
+                pass
             self.add_to_dump(f"Node {self.node_id} (leader) received an RPC to set key {key} to value {value}")
             return raft_pb2.ServeClientReply(
                 Data="SUCCESS",
@@ -169,6 +172,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             key = command[1]
             value = self.get_key_value(key)
             self.add_to_dump(f"Node {self.node_id} (leader) received an RPC to get value of key {key}")
+            while time.time() < self.max_old_leader_lease_till:
+                pass
             return raft_pb2.ServeClientReply(
                 Data=value,
                 LeaderID=str(self.leader_id),
@@ -264,6 +269,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                             print(f"Node {self.node_id}: Received majority votes, becoming leader")
                             if self.max_old_leader_lease > 0:
                                 self.add_to_dump(f"New Leader waiting for Old Leader Lease to timeout.")
+                            self.max_old_leader_lease_till = time.time() + self.max_old_leader_lease
                             self.become_leader()
                             return
                 except grpc.RpcError as e:
