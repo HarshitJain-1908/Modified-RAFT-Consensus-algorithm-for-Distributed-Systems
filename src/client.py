@@ -9,7 +9,7 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
     def __init__(self, node_addresses):
         self.node_addresses = node_addresses
         print(self.node_addresses)
-        self.current_leader_id = 1
+        self.current_leader_id = 0
 
     def set_leader_id(self, leader_id):
         self.current_leader_id = leader_id
@@ -23,7 +23,7 @@ class RaftClient(raft_pb2_grpc.RaftServiceServicer):
             return None, "No leader available"
 
         try:
-            print("*******************")
+            print("Sending request to leader ", self.current_leader_id, self.node_addresses, self.node_addresses[self.current_leader_id])
             with grpc.insecure_channel(self.node_addresses[self.current_leader_id]) as channel:
                 stub = raft_pb2_grpc.RaftServiceStub(channel)
                 print(request)

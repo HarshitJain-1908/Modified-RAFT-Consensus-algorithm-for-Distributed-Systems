@@ -354,7 +354,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.next_index[node] = len(self.log)
             rep = 1
             for peer in self.cluster_nodes:
-                if peer != self.node_id:
+                if self.cluster_nodes[peer] != self.node_id:
                     if self.match_index[peer] == len(self.log) - 1:
                         rep += 1
                 if rep > len(self.cluster_nodes) // 2:
@@ -368,7 +368,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                 if self.log[i].term == self.current_term:
                     replicated = 1
                     for peer in self.cluster_nodes:
-                        if peer != self.node_id:
+                        if self.cluster_nodes[peer] != self.node_id:
                             if self.match_index[peer] >= i:
                                 replicated += 1
                     if replicated > len(self.cluster_nodes) // 2:
