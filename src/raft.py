@@ -60,7 +60,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.lease_timeout = None
         self.max_old_leader_lease = 0
         self.max_old_leader_lease_till = 0
-
+        self.rep = 0
         
         LOGS_DIR = f"logs_node_{self.node_id}"
         self.logs_dir = LOGS_DIR.format(node_id=node_id)
@@ -233,9 +233,6 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = []
             for node in self.cluster_nodes:
-                # print("key", key)
-                # node = self.cluster_nodes[key]
-                print("node with address", node, "id:", self.cluster_nodes[node])
                 if self.cluster_nodes[node] != self.node_id:
                     try:
                         request = raft_pb2.RequestVoteRequest(
@@ -251,12 +248,8 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
                         # Submit the task to the thread pool
                         # futures.append(executor.submit(self.request_vote, node, request))
                     
-            # time.sleep(0.7)
-            print("futures1", futures)
             concurrent.futures.wait(futures)
-            print("futures", futures)
             for future in (futures):
-                print("we are in future")
                 try:
                     reply = future.result()
                     print("reply", reply)
@@ -315,6 +308,7 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
         self.broadcast_append_entries(lease_duration=LEASE_DURATION)
 
     def broadcast_append_entries(self, lease_duration=None):
+        self.rep = 1
         with concurrent.futures.ThreadPoolExecutor() as executor:
             for node in self.cluster_nodes:
                 # node = self.cluster_nodes[key]
@@ -358,15 +352,17 @@ class RaftNode(raft_pb2_grpc.RaftServiceServicer):
             self.match_index[node] = len(self.log) - 1
             #print(f"next_index{node} = {self.next_index[node]}; len(self.log) = {len(self.log)}, time: {time.time()}")
             self.next_index[node] = len(self.log)
-            rep = 1
-            for peer in self.cluster_nodes:
-                if self.cluster_nodes[peer] != self.node_id:
-                    if self.match_index[peer] == len(self.log) - 1:
-                        rep += 1
-                if rep > len(self.cluster_nodes) // 2:
-                    self.lease_timeout = time.time() + LEASE_DURATION
-                    print("Actually Renewing lease")
-                    break
+            # rep = 1
+            # for peer in self.cluster_nodes:
+            #     if self.cluster_nodes[peer] != self.node_id:
+            #         print("rep:", rep)
+            # if self.match_index[node] == len(self.log) - 1:
+            self.rep += 1
+                #             rep += 1
+            print("after if rep:", node, self.rep)
+            if self.rep > len(self.cluster_nodes) // 2:
+                self.lease_timeout = time.time() + LEASE_DURATION
+                print("Actually Renewing lease")
             
 
             committed_entries = []
