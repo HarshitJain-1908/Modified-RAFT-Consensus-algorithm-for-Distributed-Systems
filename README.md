@@ -12,7 +12,7 @@ This project implements the Raft consensus algorithm with a leader lease modific
 
 ### Implementation Details
 1. **Storage and Database Operations**
-   - Each Raft node persists its logs, metadata, and a dump file for debugging purposes. Logs are stored in a human-readable format (e.g., .txt).
+   - Each Raft node persists its logs, metadata, and a dump file for debugging purposes. Logs are stored in a .txt format.
    - Logs only store WRITE operations and NO-OP operations, along with the term number.
    - Supported operations:
      - SET K V: Maps key K to value V.
@@ -51,12 +51,12 @@ This project implements the Raft consensus algorithm with a leader lease modific
 1. **Node Setup**
    - Each node is hosted on a separate VM.
    - Install dependencies: Python, gRPC.
-   - Clone the repository and navigate to the node directory.
+   - Clone the repository and navigate to the src directory.
    - Start the node using `python node.py <node_id> <cluster_nodes>`.
 
 2. **Client Setup**
    - Install dependencies: Python, gRPC.
-   - Clone the repository and navigate to the client directory.
+   - Clone the repository and navigate to the src directory.
    - Start the client using `python client.py --nodes <node_addresses>`.
 
 3. **Testing and Debugging**
@@ -98,11 +98,3 @@ print(value)
 ### Conclusion
 
 This implementation of the Raft consensus algorithm with leader lease modification provides a robust and fault-tolerant distributed system for storing and retrieving key-value pairs. It ensures consistency, availability, and partition tolerance, making it suitable for use in distributed databases and systems requiring strong consistency guarantees.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
